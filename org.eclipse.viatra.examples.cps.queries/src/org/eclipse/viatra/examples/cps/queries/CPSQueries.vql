@@ -1,0 +1,111 @@
+package org.eclipse.viatra.examples.cps.queries
+
+//imports the EPackage of the model and initializes the metamodel
+//I think.
+import "http://org.eclipse.viatra/model/cps"
+
+pattern list_all_hosts_and_their_ip_addr(h : HostInstance, ip : java String){
+	//EClasses from imported packages work normally
+	//Java classes need "java" prepended
+	HostInstance.nodeIp(h, ip);
+	//match all HostInstances h and Strings ip which are in the following relationship:
+	//h has attribute nodeIp with value ip
+}
+
+pattern list_hosts_with_empty_ip(h : HostInstance){
+	HostInstance.nodeIp(h, "");
+}
+
+pattern runningApplication(application : ApplicationInstance) {
+    //EEnums can be queried normally
+    ApplicationInstance.state(application, AppState::Running);
+    //match all Instances which states are set to AppState.Running
+}
+
+//lists all host-pairs with the same IP-address
+pattern sameIpAddress(host1 : HostInstance, host2 : HostInstance, commonIp : java String) {
+    HostInstance.nodeIp(host1, commonIp);
+    //match a host1 with the ip address
+    HostInstance.nodeIp(host2, commonIp);
+    //match another host (or same if there is no second) with the ip-address
+    host1!=host2;
+    //require that the found hosts are not equal
+}
+
+pattern ipFormatInvalid(host : HostInstance, ip : java String) {
+    HostInstance.nodeIp(host,ip);
+	//weird regex expression
+    check (
+    	//checks in general are written in "XBASE"
+    	//https://www.eclipse.org/Xtext/documentation/305_xbase.html#xbase-expressions
+        !ip.matches("^[\\d\\.]+")
+    );
+}
+
+pattern connectedTo(state: State, other: State){
+	//states properly contain [0 *] transistions
+	// a transistion can reference [0 1] states
+	//this pattern searches for a state which contains a transistion which links to a state 
+    // There exists a transition from `state` to `other`
+    State.outgoingTransitions(state, transition);
+    Transition.targetState(transition, other);
+}
+
+//pattern natches all hosts which are deemed invalid
+//invalid hosts have shared ip addresses or no address or invalid ip syntax
+//matches of this pattern are if at least one of the or find blocks are positive
+// find is used to reuse existing patterns
+pattern badHost(host : HostInstance, ip : java String) {
+	//find hosts with duplicate ip addresses
+    find sameIpAddress(host, _other, ip);
+    // _ underscore means that such an object needs to exist, but value is not of importance
+    // variable is single use and cannot be referenced in further code
+} or {
+    HostInstance.nodeIp(host, ip);
+    find list_hosts_with_empty_ip(host);
+} or {
+    find ipFormatInvalid(host, ip);
+}
+
+pattern goodHost(host : HostInstance, ip : java String) {
+    HostInstance.nodeIp(host, ip);
+    //restrict matches to host ip constallations which are bound by nodeIp
+    neg find badHost(host, _);
+    //find all negative matches of find
+}
+
+//private patterns are only accessible from within the generated matcher files.
+//They cannot be used programmatically
+private pattern allocatedApplications(host : HostInstance, app : ApplicationInstance) {
+    HostInstance.applications(host, app);
+}
+
+//calculates how many applications a single host has
+pattern countApplications(host : HostInstance, m : java Integer) {
+	//count find returns an integer of match results
+    m == count find allocatedApplications(host, _);
+    //integer m is assigned the amount of matches
+}
+
+//matches all states which are reachable within the statemashine model
+pattern reachableState(sm :StateMachine, state: State){
+	// the queried state is the initial state and thus reachable
+    StateMachine.initial(sm, state);
+} or {
+	//match the statemashine and its initial state for further reference
+    StateMachine.initial(sm, initial_state);
+    //check if the state to be queried is actually part of the statemashine by querying
+    //if it is referenced
+    StateMachine.states(sm, state);
+    //use connectedTo pattern to verify if the queried state is reachable
+    //the plus sign means that the pattern is used in conjunction with transitive closure
+    //a path is searched by looking at the matches of the connectedTo matches
+    find connectedTo+(initial_state, state);
+}
+
+
+
+
+
+
+

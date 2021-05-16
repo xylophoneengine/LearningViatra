@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!DOCTYPE xml>
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated social_net -->
+      <package
+            uri="http://www.example.org/social_net"
+            class="social_net.Social_netPackage"
+            genModel="model/social_net.genmodel"/>
+   </extension>
+
+</plugin>

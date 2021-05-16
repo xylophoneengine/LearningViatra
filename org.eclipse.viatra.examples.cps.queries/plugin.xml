@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="org.eclipse.viatra.examples.cps.queries.CPSQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:org.eclipse.viatra.examples.cps.queries.CPSQueries" id="org.eclipse.viatra.examples.cps.queries.CPSQueries">
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.list_all_hosts_and_their_ip_addr"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.list_hosts_with_empty_ip"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.runningApplication"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.sameIpAddress"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.ipFormatInvalid"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.connectedTo"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.badHost"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.goodHost"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.countApplications"/>
+      <query-specification fqn="org.eclipse.viatra.examples.cps.queries.reachableState"/>
+    </group>
+  </extension>
+  <extension id="queryrunner" point="org.eclipse.core.runtime.applications">
+    <application cardinality="singleton-global" thread="main" visible="true">
+      <run class="org.eclipse.viatra.examples.cps.queries.runner.QueryRunner"/>
+    </application>
+  </extension>
+</plugin>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<social_net:SocialNetwork xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:social_net="http://www.example.org/social_net">
+  <user user_name="Su" subscribed_to_topic="//@topic.0"/>
+  <user user_name="Alice" subscribed_to_topic="//@topic.1" subscribed_to_user="//@user.2"/>
+  <user user_name="Bob" subscribed_to_topic="//@topic.2" subscribed_to_user="//@user.3 //@user.6 //@user.0"/>
+  <user user_name="Wei" subscribed_to_topic="//@topic.3"/>
+  <user user_name="An" subscribed_to_topic="//@topic.4"/>
+  <user user_name="Hina" subscribed_to_topic="//@topic.5"/>
+  <user user_name="Ye" subscribed_to_topic="//@topic.6"/>
+  <user user_name="Tang" subscribed_to_topic="//@topic.7"/>
+  <user user_name="Bao" subscribed_to_topic="//@topic.8"/>
+  <user user_name="Liu" subscribed_to_topic="//@topic.9"/>
+  <topic content="topic number: 0"/>
+  <topic content="topic number: 1"/>
+  <topic content="topic number: 2"/>
+  <topic content="topic number: 3"/>
+  <topic content="topic number: 4"/>
+  <topic content="topic number: 5"/>
+  <topic content="topic number: 6"/>
+  <topic content="topic number: 7"/>
+  <topic content="topic number: 8"/>
+  <topic content="topic number: 9"/>
+</social_net:SocialNetwork>

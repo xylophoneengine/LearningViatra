@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="social_net" nsURI="http://www.example.org/social_net" nsPrefix="social_net">
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="user_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subscribed_to_topic" upperBound="-1"
+        eType="#//Topic"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subscribed_to_user" upperBound="-1"
+        eType="#//User"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Topic">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="super_topic" upperBound="-1"
+        eType="#//Topic" eOpposite="#//Topic/sub_topic"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sub_topic" upperBound="-1"
+        eType="#//Topic" eOpposite="#//Topic/super_topic"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SocialNetwork">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//User"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topic" upperBound="-1"
+        eType="#//Topic" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

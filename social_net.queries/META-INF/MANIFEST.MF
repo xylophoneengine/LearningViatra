@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: social_net.queries
+Bundle-SymbolicName: social_net.queries;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Export-Package: social_net.queries.sample_queries
+Require-Bundle: org.eclipse.emf.ecore,
+ org.eclipse.viatra.query.runtime,
+ org.eclipse.viatra.query.runtime.rete,
+ org.eclipse.viatra.query.runtime.localsearch,
+ org.eclipse.xtext.xbase.lib,
+ social_net;bundle-version="0.1.0",
+ org.eclipse.core.runtime;bundle-version="3.20.100"
+Bundle-RequiredExecutionEnvironment: JavaSE-15
+Import-Package: org.apache.log4j
+Automatic-Module-Name: social.net.queries

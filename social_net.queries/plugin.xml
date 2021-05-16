@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<plugin>
+  <extension id="SocialNetQueryRunner" point="org.eclipse.core.runtime.applications">
+    <application cardinality="singleton-global" thread="main" visible="true">
+      <run class="social_net.queries.sample_queries.SocialNetQueryRunner"/>
+    </application>
+  </extension>
+  <extension id="social_net.queries.sample_queries.SocialNetQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:social_net.queries.sample_queries.SocialNetQueries" id="social_net.queries.sample_queries.SocialNetQueries">
+      <query-specification fqn="social_net.queries.sample_queries.listUsers"/>
+    </group>
+  </extension>
+</plugin>

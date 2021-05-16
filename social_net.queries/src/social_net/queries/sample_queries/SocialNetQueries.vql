@@ -1,0 +1,7 @@
+package social_net.queries.sample_queries
+
+import "http://www.example.org/social_net"
+
+pattern listUsers(u : User){
+	User(u);
+}
