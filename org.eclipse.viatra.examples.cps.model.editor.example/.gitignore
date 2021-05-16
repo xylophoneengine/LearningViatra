@@ -1,0 +1,8 @@
+/.metadata/
+/src-gen/
+**.class
+**.java_trace
+/bin/
+bin/
+/xtend-gen/
+/.settings/
