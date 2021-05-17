@@ -52,13 +52,35 @@ class SocialNetQueryRunner implements IApplication {
 	}
 
 	private def printAllMatches(ViatraQueryEngine engine) {
-		var ListUsers.Matcher matcher =
-			ListUsers.Matcher.on(engine);
+		var User_subscribed_to.Matcher matcher =
+			User_subscribed_to.Matcher.on(engine);
 		// Get and iterate over all matches
 		println(System.lineSeparator + "Query results:")
 		for (match : matcher.getAllMatches())
 			//match is of type ListUsers.Match
-			println(match.getU())
+			println(match.getU1.user_name + " is subscribed to " + match.u2.user_name)
+		println()
+	}
+
+	private def transitive_closure_test(ViatraQueryEngine engine){
+		var Proper_transitive_closure.Matcher matcher = 
+		Proper_transitive_closure.Matcher.on(engine)
+		println(System.lineSeparator + "Query results transitive closure:")
+		for (match : matcher.getAllMatches()){
+			//match is of type ListUsers.Match
+			println(match.getU1().user_name + "-->" +  match.getU2.user_name)
+			}
+		println()
+	}
+	
+		private def weird_transitive_closure_test(ViatraQueryEngine engine){
+		var Weird_transitive_closure.Matcher matcher = 
+		Weird_transitive_closure.Matcher.on(engine)
+		println(System.lineSeparator + "Query results of weird transitive closure:")
+		for (match : matcher.getAllMatches()){
+			//match is of type ListUsers.Match
+			println(match.getU1().user_name + "-->" +  match.getU2.user_name)
+			}
 		println()
 	}
 
@@ -68,5 +90,7 @@ class SocialNetQueryRunner implements IApplication {
 		)
 		val query_engine = prepareQueryEngine(scope)
 		printAllMatches(query_engine)
+		transitive_closure_test(query_engine)
+		weird_transitive_closure_test(query_engine)
 	}
 }

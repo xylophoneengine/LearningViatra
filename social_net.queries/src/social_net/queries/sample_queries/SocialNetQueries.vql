@@ -5,3 +5,23 @@ import "http://www.example.org/social_net"
 pattern listUsers(u : User){
 	User(u);
 }
+
+pattern user_subscribed_to(u1 : User, u2 : User){
+	User.subscribed_to_user(u1, u2);
+	u1 != u2;
+}
+
+//calculates transitive closure of Users subscribed to each other
+//needs first match for proper closure as the first intermediary node
+//should not be part of it
+pattern proper_transitive_closure(u1 : User, u2 : User){
+	find user_subscribed_to(u1, u);
+	find user_subscribed_to+(u, u2);
+}
+
+//calculates transitive closure as stated by viatra definition.
+//However, the initial intermediary node is matched as well. Thus this
+//calculates general reachability and not transitive closure
+pattern weird_transitive_closure(u1 : User, u2 : User){
+	find user_subscribed_to+(u1, u2);
+}

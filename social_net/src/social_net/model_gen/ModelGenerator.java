@@ -86,6 +86,7 @@ public class ModelGenerator {
 		creator.subscribe_u1_to_u2(users.get(2), users.get(3));
 		creator.subscribe_u1_to_u2(users.get(2), users.get(6));
 		creator.subscribe_u1_to_u2(users.get(2), users.get(0));
+		creator.subscribe_u1_to_u2(users.get(3), users.get(8));
 		SocialNetwork net = creator.create_net();
 		net.getUser().addAll(users);
 		net.getTopic().addAll(topics);
