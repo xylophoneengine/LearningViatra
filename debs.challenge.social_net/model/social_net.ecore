@@ -5,9 +5,17 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time_stmp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comments" upperBound="-1"
+        eType="#//Comment" eOpposite="#//Comment/subject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="author" eType="#//User"
+        eOpposite="#//User/topics"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//Topic">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="replied_topic_id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="likes" upperBound="-1"
+        eType="#//Like" eOpposite="#//Like/likedComment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subject" lowerBound="1"
+        eType="#//Topic" eOpposite="#//Topic/comments"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Post" eSuperTypes="#//Topic"/>
   <eClassifiers xsi:type="ecore:EClass" name="User">
@@ -15,6 +23,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="friendships" upperBound="-1"
         eType="#//Friendship" eOpposite="#//Friendship/friends"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="givenLikes" upperBound="-1"
+        eType="#//Like" eOpposite="#//Like/user"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topics" upperBound="-1"
+        eType="#//Topic" eOpposite="#//Topic/author"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Friendship">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time_stmp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -23,5 +35,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Like">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time_stmp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//User"
+        eOpposite="#//User/givenLikes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="likedComment" lowerBound="1"
+        eType="#//Comment" eOpposite="#//Comment/likes"/>
   </eClassifiers>
 </ecore:EPackage>
