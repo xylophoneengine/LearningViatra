@@ -7,7 +7,7 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
-
+import org.eclipse.emf.ecore.resource.Resource
 
 /*
  * step 1) add the dependency to the MANIFEST.MF
@@ -24,7 +24,8 @@ class SocialNetQueryRunner implements IApplication {
 	
 	override start(IApplicationContext context) throws Exception {
 		println("application starting")
-		sample_headless_query_sequence()
+		//sample_headless_query_sequence()
+		sample_dynamic_headless_query_sequence()
 		return 0;
 	}
 	
@@ -40,6 +41,10 @@ class SocialNetQueryRunner implements IApplication {
 				true),
 			true
 		);
+		return new EMFScope(rs);
+	}
+	
+	private def EMFScope dynamic_init(Resource rs){
 		return new EMFScope(rs);
 	}
 	
@@ -92,5 +97,16 @@ class SocialNetQueryRunner implements IApplication {
 		printAllMatches(query_engine)
 		transitive_closure_test(query_engine)
 		weird_transitive_closure_test(query_engine)
+	}
+	
+	def private sample_dynamic_headless_query_sequence(){
+		var model_generator = new ModelGenerator("dynamic_sample")
+		val scope = dynamic_init(model_generator.create_sample_net())
+		val query_engine = prepareQueryEngine(scope)
+		printAllMatches(query_engine)
+		var user_1 = model_generator.create_user("num1")
+		var user_2 = model_generator.create_user("num2")
+		model_generator.subscribe_u1_to_u2(user_1, user_2)
+		printAllMatches(query_engine)
 	}
 }
