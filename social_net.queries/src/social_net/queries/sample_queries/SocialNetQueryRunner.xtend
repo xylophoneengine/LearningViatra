@@ -103,10 +103,20 @@ class SocialNetQueryRunner implements IApplication {
 		var model_generator = new ModelGenerator("dynamic_sample")
 		val scope = dynamic_init(model_generator.create_sample_net())
 		val query_engine = prepareQueryEngine(scope)
-		printAllMatches(query_engine)
+		var User_subscribed_to.Matcher matcher =
+			User_subscribed_to.Matcher.on(query_engine);
+		// Get and iterate over all matches
+		println(System.lineSeparator + "Query results:")
+		for (match : matcher.getAllMatches())
+			//match is of type ListUsers.Match
+			println(match.getU1.user_name + " is subscribed to " + match.u2.user_name)
+		println()
 		var user_1 = model_generator.create_user("num1")
 		var user_2 = model_generator.create_user("num2")
 		model_generator.subscribe_u1_to_u2(user_1, user_2)
-		printAllMatches(query_engine)
+		for (match : matcher.getAllMatches())
+			//match is of type ListUsers.Match
+			println(match.getU1.user_name + " is subscribed to " + match.u2.user_name)
+		println()
 	}
 }
