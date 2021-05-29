@@ -5,3 +5,4 @@ Bundle-SymbolicName: debs.challenge.social_net; singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.runtime
+Automatic-Module-Name: debs.challenge.social.net

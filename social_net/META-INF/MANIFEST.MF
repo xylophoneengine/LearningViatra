@@ -6,7 +6,8 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-15
+Bundle-RequiredExecutionEnvironment: JavaSE-14,
+ JavaSE-15
 Export-Package: social_net,
  social_net.impl,
  social_net.util

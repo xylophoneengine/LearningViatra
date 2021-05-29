@@ -10,6 +10,7 @@
       <query-specification fqn="social_net.queries.sample_queries.user_subscribed_to"/>
       <query-specification fqn="social_net.queries.sample_queries.proper_transitive_closure"/>
       <query-specification fqn="social_net.queries.sample_queries.weird_transitive_closure"/>
+      <query-specification fqn="social_net.queries.sample_queries.match_users_and_age"/>
     </group>
   </extension>
 </plugin>

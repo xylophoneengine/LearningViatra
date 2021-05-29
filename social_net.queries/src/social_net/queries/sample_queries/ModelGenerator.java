@@ -30,9 +30,10 @@ public class ModelGenerator {
         this.net = net_factory.createSocialNetwork();
 	}
 	
-	public User create_user(String name) {
+	public User create_user(String name, Long age) {
 		User u = net_factory.createUser();
 		u.setUser_name(name);
+		u.setAge(age);
 		this.net.getUser().add(u);
 		return u;
 	}
@@ -75,7 +76,7 @@ public class ModelGenerator {
 		ArrayList<Topic> topics = new ArrayList<>();
 
 		for(int i = 0; i < 10 ; i++) {
-			User u = this.create_user(names[i]);
+			User u = this.create_user(names[i], new Long(i));
 			Topic t = this.create_topic("topic number: " + i);
 			this.subscribe_u1_to_topic_t2(u, t);
 			users.add(u);

@@ -25,3 +25,8 @@ pattern proper_transitive_closure(u1 : User, u2 : User){
 pattern weird_transitive_closure(u1 : User, u2 : User){
 	find user_subscribed_to+(u1, u2);
 }
+
+pattern match_users_and_age(u : User, l : java Long){
+	User.age(u, l);
+	check(l > 10);
+}

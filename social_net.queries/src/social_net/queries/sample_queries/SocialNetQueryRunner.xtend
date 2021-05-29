@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.emf.ecore.resource.Resource
+import java.util.regex.Matcher
 
 /*
  * step 1) add the dependency to the MANIFEST.MF
@@ -111,12 +112,18 @@ class SocialNetQueryRunner implements IApplication {
 			//match is of type ListUsers.Match
 			println(match.getU1.user_name + " is subscribed to " + match.u2.user_name)
 		println()
-		var user_1 = model_generator.create_user("num1")
-		var user_2 = model_generator.create_user("num2")
+		var user_1 = model_generator.create_user("num1", new Long(376245))
+		var user_2 = model_generator.create_user("num2", new Long(28338))
 		model_generator.subscribe_u1_to_u2(user_1, user_2)
 		for (match : matcher.getAllMatches())
 			//match is of type ListUsers.Match
 			println(match.getU1.user_name + " is subscribed to " + match.u2.user_name)
+		println()
+		
+		var Match_users_and_age.Matcher m = Match_users_and_age.Matcher.on(query_engine)
+		for (match : m.getAllMatches())
+			//match is of type ListUsers.Match
+			println(match.u.user_name + " is " + match.l + "old")
 		println()
 	}
 }
